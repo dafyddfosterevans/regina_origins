@@ -105,6 +105,17 @@ public class Game{
                 break;
             }
         }
+
+        int noOfMonsters = (int) Math.ceil((size * size) / 10);
+
+        for (int i = 0; i < noOfMonsters;){
+            rand_x = random.nextInt(size); //random number generator (0- size)
+            rand_y = random.nextInt(size); //random number generator (0- size)
+            if (grid[rand_x][rand_y] == null){
+                grid[rand_x][rand_y] = new Monster(rand_x, rand_y, "Regina found you! You're dead!");
+                i++;
+            }
+        }
         
     }
 
