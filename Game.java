@@ -14,9 +14,10 @@ public class Game{
 
         startScreen();
         populateGrid();
+        sc.nextLine();
 
         while (true){
-            System.out.println("Distance to treasure = " + p.distanceToTreasure(t));
+            System.out.println("Distance to treasure = " + p.distanceToTreasure(t) + "\n");
             boolean gameContinues = gamePlayerMovement();
             if(!gameContinues){
                 break;
@@ -30,8 +31,8 @@ public class Game{
         System.out.println("Welcome to Regina Origins!\n");
         System.out.println("Please enter the size of the grid: ");
         size = sc.nextInt();
-        System.out.println("\nIn this game you need to find the treasure (donut) while avoiding the monster");    
-
+        System.out.println("\nIn this game you need to find the treasure (donut) while avoiding the monster\n");    
+    
     }
 
 
@@ -40,15 +41,12 @@ public class Game{
         // getting player coordinates
         int tempX;
         int tempY;
-
         while (true){
             tempX = p.getX();
             tempY= p.getY();
             boolean moved = true;
             System.out.println("Enter your move : R - right, L - left , U - Up or D - Down");
-            
             String movement = sc.nextLine().toLowerCase();   // Inputs the players movement     
-
             switch(movement)
             {
                 case "r" : tempX++; 
@@ -64,7 +62,7 @@ public class Game{
             }
 
             if(tempX >= size || tempY >= size || tempX < 0 || tempY < 0 || !moved) {
-                System.out.println("Not a valid movement, please try again!");         
+                System.out.println("\nNot a valid movement, please try again!\n");         
             } else{
                 break;
             }
