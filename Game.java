@@ -1,6 +1,7 @@
 // Game.java will be the main class, i.e, it will have main function.
 import java.util.Scanner;
 import java.util.Random;
+
 public class Game{
     
     private static int size;
@@ -30,7 +31,7 @@ public class Game{
         
         System.out.println("Welcome to Regina Origins!\n");
         System.out.println("Please enter the size of the grid: ");
-        size = sc.nextInt();
+        size = sc.nextInt(); // scans for input of grid size
         System.out.println("\nIn this game you need to find the treasure (donut) while avoiding the monster\n");    
     
     }
@@ -47,7 +48,7 @@ public class Game{
             boolean moved = true;
             System.out.println("Enter your move : R - right, L - left , U - Up or D - Down");
             String movement = sc.nextLine().toLowerCase();   // Inputs the players movement     
-            switch(movement)
+            switch(movement) // use switch statement to update the temporary coordinates with users input
             {
                 case "r" : tempX++; 
                             break;
@@ -60,16 +61,16 @@ public class Game{
                 default : moved = false;
                             break;
             }
-
+            // use if statement to check temporary coordinates are still within the defined grid size 
             if(tempX >= size || tempY >= size || tempX < 0 || tempY < 0 || !moved) {
-                System.out.println("\nNot a valid movement, please try again!\n");         
+                System.out.println("\nNot a valid movement, please try again!\n");  // if temporary coordinates are not in grid the while loop restarts and asks for input again       
             } else{
-                break;
+                break; // if temporary coordinates are within grid break out of the while loop
             }
 
         }
 
-        // updating the values of player position
+        // once position in grid confirmed update the values of player position
         if (grid[tempX][tempY] == null){
             int oldX = p.getX();
             int oldY = p.getY();
