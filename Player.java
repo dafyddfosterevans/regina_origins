@@ -14,4 +14,14 @@ public class Player extends Entity{
         return Math.sqrt((t_x_pos - x_pos) * (t_x_pos - x_pos) + (t_y_pos - y_pos) * (t_y_pos - y_pos ));
     }
 
+    // function to determine the moves to reach the treasure
+    public int movesToTreasure(Treasure t)
+    {
+        int t_x_pos=t.getX();
+        int t_y_pos=t.getY();
+
+        int numOfMoves= Math.abs(x_pos-t_x_pos)+ Math.abs(y_pos-t_y_pos);
+        return numOfMoves;
+    }
+
 }
