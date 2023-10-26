@@ -1,4 +1,6 @@
 // Game.java will be the main class, i.e, it will have main function.
+
+
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
@@ -18,12 +20,12 @@ public class Game{
         populateGrid();
         sc.nextLine();
 
-        while (true){
-            for (int i = 0; i < t.size(); i++){
+        while (true){ // game loop
+            for (int i = 0; i < t.size(); i++){ // print the block distance to each treasure
                 System.out.println("Moves to treasure " + (i + 1) + " = " + p.movesToTreasure(t.get(i)) + "\n");
             }
             boolean gameContinues = gamePlayerMovement();
-            if(!gameContinues){
+            if(!gameContinues){ // check if the game has ended
                 break;
             }
         }
@@ -74,30 +76,34 @@ public class Game{
         }
 
         // once position in grid confirmed update the values of player position
-        if (grid[tempX][tempY] == null){
+        if (grid[tempX][tempY] == null){ // Check if grid space empty
             int oldX = p.getX();
             int oldY = p.getY();
             grid[oldX][oldY] = null; // clear old position
             grid[tempX][tempY] = p; // Update new position
             p.move(tempX, tempY);
             return true;
-        } else if(grid[tempX][tempY] instanceof Treasure){
+
+        } else if(grid[tempX][tempY] instanceof Treasure){ // Check if grid space has treasure
             grid[tempX][tempY].printMessage();
-            if(t.size() <= 1){
+            
+            if(t.size() <= 1){ // check if this is last treasure
                 System.out.println("CONGRATULATIONS! YOU WON!");
                 return false;
+                
             } else{
-                int index = t.indexOf(grid[tempX][tempY]);
-                grid[tempX][tempY] = null;
-                t.remove(index);
-                int oldX = p.getX();
+                int index = t.indexOf(grid[tempX][tempY]); // Obtaining the index of treasure that was found 
+                grid[tempX][tempY] = null; // clear the treasure
+                t.remove(index);// remove the index of the found treasure
+                int oldX = p.getX();// obtaining the current position of the player - because they encountered the treasure.
                 int oldY = p.getY();
                 grid[oldX][oldY] = null; // clear old position
-                grid[tempX][tempY] = p; // Update new position
-                p.move(tempX, tempY);
+                grid[tempX][tempY] = p; // Update new position to continue the game to find the remaining treasure!
+                p.move(tempX, tempY); // Move the player to the new position as directed by the user.
                 return true;
             }
-        } else{
+            
+        } else{ // you've hit a monster
             grid[tempX][tempY].printMessage();
             System.out.println("GAME OVER! YOU LOSE!");
             return false;
