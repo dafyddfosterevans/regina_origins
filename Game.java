@@ -109,7 +109,6 @@ public class Game{
         }
 
     }
-    
     // Function for populating the grid with player, monsters and treasure
     public static void populateGrid(){
         
@@ -122,7 +121,7 @@ public class Game{
         grid[rand_x][rand_y] = p;
 
         // assigining the treasure coordinates
-        int noOfTreasure = (int) (Math.ceil((size * size) / 10)) / 2; // Creating treasures as half the number of monsters
+        int noOfTreasure = (int) (Math.ceil((size * size) / 10.0) / 2.0); // Creating treasures as half the number of monsters
         t = new ArrayList<Treasure>();
         for (int i = 0; i < noOfTreasure;){
             rand_x = random.nextInt(size); //random number generator (0- size)
@@ -135,7 +134,7 @@ public class Game{
             }
         }
 
-        int noOfMonsters = (int) Math.ceil((size * size) / 10);
+        int noOfMonsters = (int) Math.ceil((size * size) / 10.0);
 
         for (int i = 0; i < noOfMonsters;){
             rand_x = random.nextInt(size); //random number generator (0- size)
