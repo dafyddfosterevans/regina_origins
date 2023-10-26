@@ -1,6 +1,7 @@
 // Game.java will be the main class, i.e, it will have main function.
 import java.util.Scanner;
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Game{
     
@@ -9,7 +10,7 @@ public class Game{
     public static Random random = new Random();
     private static Entity[][] grid;
     private static Player p;
-    private static Treasure[] t;
+    private static ArrayList<Treasure> t;
     
     public static void main(String[] args){
 
@@ -18,8 +19,8 @@ public class Game{
         sc.nextLine();
 
         while (true){
-            for (int i = 0; i < t.length; i++){
-                System.out.println("Distance to treasure " + (i + 1) + " = " + p.distanceToTreasure(t[i]) + "\n");
+            for (int i = 0; i < t.size(); i++){
+                System.out.println("Moves to treasure " + (i + 1) + " = " + p.movesToTreasure(t.get(i)) + "\n");
             }
             boolean gameContinues = gamePlayerMovement();
             if(!gameContinues){
@@ -80,8 +81,25 @@ public class Game{
             grid[tempX][tempY] = p; // Update new position
             p.move(tempX, tempY);
             return true;
+        } else if(grid[tempX][tempY] instanceof Treasure){
+            grid[tempX][tempY].printMessage();
+            if(t.size() <= 1){
+                System.out.println("CONGRATULATIONS! YOU WON!");
+                return false;
+            } else{
+                int index = t.indexOf(grid[tempX][tempY]);
+                grid[tempX][tempY] = null;
+                t.remove(index);
+                int oldX = p.getX();
+                int oldY = p.getY();
+                grid[oldX][oldY] = null; // clear old position
+                grid[tempX][tempY] = p; // Update new position
+                p.move(tempX, tempY);
+                return true;
+            }
         } else{
             grid[tempX][tempY].printMessage();
+            System.out.println("GAME OVER! YOU LOSE!");
             return false;
         }
 
@@ -100,15 +118,14 @@ public class Game{
 
         // assigining the treasure coordinates
         int noOfTreasure = (int) (Math.ceil((size * size) / 10)) / 2; // Creating treasures as half the number of monsters
-        t = new Treasure[noOfTreasure];
-
+        t = new ArrayList<Treasure>();
         for (int i = 0; i < noOfTreasure;){
             rand_x = random.nextInt(size); //random number generator (0- size)
             rand_y = random.nextInt(size); //random number generator (0- size)
             if (grid[rand_x][rand_y] == null){
                 Treasure treasure = new Treasure(rand_x, rand_y, "You found me!");
                 grid[rand_x][rand_y] = treasure;
-                t[i] = treasure;
+                t.add(treasure);
                 i++;
             }
         }
