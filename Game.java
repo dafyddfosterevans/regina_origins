@@ -1,6 +1,5 @@
 // Game.java will be the main class, i.e, it will have main function.
 
-
 import java.util.Scanner;
 import java.util.Random;
 import java.util.ArrayList;
@@ -129,7 +128,7 @@ public class Game{
             rand_x = random.nextInt(size); //random number generator (0- size)
             rand_y = random.nextInt(size); //random number generator (0- size)
             if (grid[rand_x][rand_y] == null){
-                Treasure treasure = new Treasure(rand_x, rand_y, "You found me!");
+                Treasure treasure = new Treasure(rand_x, rand_y, null);
                 grid[rand_x][rand_y] = treasure;
                 t.add(treasure);
                 i++;
@@ -142,7 +141,7 @@ public class Game{
             rand_x = random.nextInt(size); //random number generator (0- size)
             rand_y = random.nextInt(size); //random number generator (0- size)
             if (grid[rand_x][rand_y] == null){
-                grid[rand_x][rand_y] = new Monster(rand_x, rand_y, "Regina found you! You're dead!");
+                grid[rand_x][rand_y] = new Monster(rand_x, rand_y, null);
                 i++;
             }
         }
