@@ -9,7 +9,7 @@ public class Game{
     public static Random random = new Random();
     private static Entity[][] grid;
     private static Player p;
-    private static Treasure t;
+    private static Treasure[] t;
     
     public static void main(String[] args){
 
@@ -18,7 +18,9 @@ public class Game{
         sc.nextLine();
 
         while (true){
-            System.out.println("Distance to treasure = " + p.distanceToTreasure(t) + "\n");
+            for (int i = 0; i < t.length; i++){
+                System.out.println("Distance to treasure " + (i + 1) + " = " + p.distanceToTreasure(t[i]) + "\n");
+            }
             boolean gameContinues = gamePlayerMovement();
             if(!gameContinues){
                 break;
@@ -97,13 +99,17 @@ public class Game{
         grid[rand_x][rand_y] = p;
 
         // assigining the treasure coordinates
-        while (true){
+        int noOfTreasure = (int) (Math.ceil((size * size) / 10)) / 2; // Creating treasures as half the number of monsters
+        t = new Treasure[noOfTreasure];
+
+        for (int i = 0; i < noOfTreasure;){
             rand_x = random.nextInt(size); //random number generator (0- size)
             rand_y = random.nextInt(size); //random number generator (0- size)
             if (grid[rand_x][rand_y] == null){
-                t = new Treasure(rand_x, rand_y, "You found me!");
-                grid[rand_x][rand_y] = t;
-                break;
+                Treasure treasure = new Treasure(rand_x, rand_y, "You found me!");
+                grid[rand_x][rand_y] = treasure;
+                t[i] = treasure;
+                i++;
             }
         }
 
