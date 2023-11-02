@@ -23,7 +23,7 @@ public class Game{
             for (int i = 0; i < t.size(); i++){ // print the block distance to each treasure
                 System.out.println("Moves to treasure " + (i + 1) + " = " + p.movesToTreasure(t.get(i)) + "\n");
             }
-            System.out.println("Your position in the grid is " + (p.getX() + 1) + (p.getY() + 1) \n);
+            System.out.println("Your position in the grid is " + (p.getX() + 1) + (p.getY() + 1) + "\n");
             boolean gameContinues = gamePlayerMovement();
             if(!gameContinues){ // check if the game has ended
                 break;
