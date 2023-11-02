@@ -35,7 +35,7 @@ public class Game{
     private static void startScreen(){
         
         System.out.println("Welcome to Regina Origins!\n");
-        System.out.println("Please enter the size of the grid: ");
+        System.out.print("Please enter the size of the grid: ");
         size = sc.nextInt(); // scans for input of grid size
         System.out.println("\nIn this game you need to find the treasure (donut) while avoiding the monster\n");    
     
@@ -51,8 +51,9 @@ public class Game{
             tempX = p.getX();
             tempY= p.getY();
             boolean moved = true;
-            System.out.println("Enter your move : R - right, L - left , U - Up or D - Down");
+            System.out.print("Enter your move : R - right, L - left , U - Up or D - Down" : );
             String movement = sc.nextLine().toLowerCase();   // Inputs the players movement     
+            System.out.println();
             switch(movement) // use switch statement to update the temporary coordinates with users input
             {
                 case "r" : tempX++; 
